@@ -1,20 +1,24 @@
+from functools import reduce
+
 class Pe(object):
     def __init__(self,input_num,activator):
+		
+		print(input_num)
 
         self.activator = activator
         self.weights = [0.0 for _ in range(input_num)]
         self.bias = 0.0
 
     def __str__(self):
-        return 'weights\t:%s\nbias\t:%f\n' % (self.weights, self.bias)
+        return ('weights\t:%s\nbias\t:%f\n' % (self.weights, self.bias))
 
 
     def predict(self, input_vec):
 
         return self.activator(
             reduce(lambda a, b: a+b,
-                    map(lambda (x,w): x * w,
-                        zip(input_vec, self.weights))
+                    list(map(lambda x_w: x_w[0] * x_w[1],
+                        zip(input_vec, self.weights)))
                     , 0.0) + self.bias)
             
     def train(self, input_vecs, labels, iteration, rate):
@@ -32,9 +36,9 @@ class Pe(object):
     def _update_weights(self, input_vec, output, label, rate):
 
         delta = label - output
-        self.weights = map(
-            lambda (x, w): w + rate * delta * x,
-            zip(input_vec, self.weights))
+        self.weights = list(map(
+            lambda x_w: x_w[1] + rate * delta * x_w[0],
+            zip(input_vec, self.weights)))
 
         self .bias += rate * delta
 def f(x):
@@ -58,10 +62,10 @@ def train_and_pe():
 
 if __name__ == '__main__':
 	and_perception = train_and_pe()
-	print and_perception
+	print(and_perception)
 
-	print '1 and 1 = %d' % and_perception.predict([1, 1])
-	print '0 and 0 = %d' % and_perception.predict([0, 0])
-	print '1 and 0 = %d' % and_perception.predict([1, 0])
-	print '0 and 1 = %d' % and_perception.predict([0, 1])
+	print('1 and 1 = %d' % (and_perception.predict([1, 1])))
+	print('0 and 0 = %d' % (and_perception.predict([0, 0])))
+	print('1 and 0 = %d' % (and_perception.predict([1, 0])))
+	print('0 and 1 = %d' % (and_perception.predict([0, 1])))
 
