@@ -2,11 +2,14 @@
 class MyPerceptron(object):
 
 	def __init__(self,_initnum_,activation):
-		print(_initnum_)
 		self.activation = activation
+		self._initnum_ = _initnum_
 	
 	def __str__(self):
-		print("_initnum_ = %f" % (self._initnum_))
+		return ("_initnum_ = %s" % (self._initnum_))
+		
+	def doSomething(self,_input_num_):
+		return (self.activation(_input_num_+int(self._initnum_)) == 0 and 'Ace') or 'Bob'
 
 def f(i):
 	return int(i)%2
@@ -17,5 +20,6 @@ def _train_add_():
 
 if __name__ == "__main__":
 	__perceptron_add__ = _train_add_()
-	print('result = %s'%(__perceptron_add__))
+	print(__perceptron_add__)
+	print('result = %s' % (__perceptron_add__.doSomething(233)))
 
