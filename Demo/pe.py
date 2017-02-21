@@ -67,3 +67,5 @@ if __name__ == '__main__':
     print('1 and 0 = %d' % and_perception.predict([1, 0]))
     print('0 and 1 = %d' % and_perception.predict([0, 1]))
 
+
+    print('This is commit test')
