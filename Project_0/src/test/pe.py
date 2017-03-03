@@ -17,6 +17,7 @@ class Perceptron(object):
         '''
         return 'weights\t:%s\nbias\t:%f\n' % (list(self.weights), self.bias)
     def predict(self, input_vec):
+
         '''
         输入向量，输出感知器的计算结果
         '''
