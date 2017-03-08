@@ -44,11 +44,10 @@ def zip_test():
 
 def for_loop(n):
 
-	for i in range(n):
-		print(i)
+	return [0.1 for i in range(n)]
 
 if __name__ == "__main__":
 	vecs = [1,0]
 	vec = 1
 #	print (zip_test())	
-	for_loop(3)
+	print(for_loop(3))

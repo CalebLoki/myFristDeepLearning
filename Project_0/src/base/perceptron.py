@@ -1,3 +1,5 @@
+from functools import reduce
+
 class Preceptron(object):
 	def __init__(self, activation, _iniunm_):
 		self.activation = activation
@@ -21,11 +23,11 @@ class Preceptron(object):
 			self.forcast(lable)
 
 	def forcast(self, lable):
-		v_sum = 0
-		
 		v_l_w_zip = zip(lable, self.weight)
 
-		print (list(v_l_w_zip))
+		v_sum = list(map(lambda x_y: x_y[0] * x_y[1] , zip(lable, self.weight)))
+
+		print (v_sum)
 
 		
 def f_act(i):
@@ -40,9 +42,9 @@ def f_get_tr_add_basedate():
 
 def train_preceptorn():
 
-	lables, vacs = f_get_tr_add_basedate()
-
 	p = Preceptron(f_act,2)
+	
+	lables, vacs = f_get_tr_add_basedate()
 
 	p.train(lables,vacs,1,0.2)
 
@@ -51,4 +53,14 @@ def train_preceptorn():
 
 if __name__ == "__main__":
 	
-	train_preceptorn()
+	and_perception = train_preceptorn()
+
+	print(and_perception)
+
+	# 测试
+	'''
+	print('1 and 1 = %s' % (and_perception.forcast([1, 1])))
+	print('0 and 0 = %d' % (and_perception.forcast([0, 0])))
+	print('1 and 0 = %d' % (and_perception.forcast([1, 0])))
+	print('0 and 1 = %d' % (and_perception.forcast([0, 1])))
+	'''
